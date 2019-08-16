@@ -1,0 +1,54 @@
+.subfield1{
+	width: 100%;
+	background-color: white;
+}
+.usepart3{
+	width: 1200px;
+	height: 400px;
+	margin:0 auto;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+.h2use1{
+	display: inline-block;
+	margin-left: 55px;
+	margin-top: 30px;
+	padding: 0px;
+	margin-bottom: 0;
+}
+.puse1{
+	display: inline-block;
+	margin: 30px 30px 10px 40px;
+}
+.usepart3>ul{
+	padding: 0;
+	margin: 0;
+	margin-top: 10px;
+	list-style: none;
+}
+.usepart3>ul>li{
+	float: left;
+	background-color: #7aa5c5;
+}
+.usepart3>ul>li:nth-child(1){
+	height: 260px;
+	width: 340px;
+	margin:10px;
+	margin-left: 60px;
+}
+.usepart3>ul>li:nth-child(2){
+	height: 260px;
+	width: 340px;
+	margin:10px;
+}
+.usepart3>ul>li:nth-child(3){
+	height: 125px;
+	width: 340px;
+	margin:10px;
+}
+.usepart3>ul>li:nth-child(4){
+	height: 125px;
+	width: 340px;
+	margin:10px;
+	margin-top: 0;
+}

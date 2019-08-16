@@ -1,0 +1,49 @@
+.subfield15{
+	width: 100%;
+	background-color: #f4f0ea;
+}
+.usepart17{
+	width: 1200px;
+	height: 600px;
+	margin:0 auto;
+	background-color: #f4f0ea;
+	overflow: hidden;
+}
+.usepart17>ul{
+	padding: 0;
+	margin:0;
+	list-style: none;
+}
+.usepart17>ul>li{
+	position: relative;
+	float: left;
+	height: 500px;
+	width: 345px;
+	margin-left: 10px;
+	margin-top: 0px;
+	background-color: white;
+}
+.usepart17>ul>li:nth-child(1){
+	margin-left: 55px;
+}
+.rrrr	{
+	position: absolute;
+	top: 310px;
+	left: 10px;
+	height: 160px;
+	width: 325px;
+	box-sizing: border-box;
+	background-color: white;
+	padding: 15px;
+
+}
+.nameuse1{
+	color: #99a6bf;
+}
+.shop-use1{
+	font-weight: bold;
+	line-height: 40px;
+}
+img:hover{
+	transform: scale(1.02);
+}

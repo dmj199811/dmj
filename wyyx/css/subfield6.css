@@ -1,0 +1,33 @@
+.subfield6{
+	width: 100%;
+	background-color: white;
+}
+.usepart8{
+	width: 1200px;
+	height: 750px;
+	margin:0 auto;
+	background-color: #acbfce;
+	overflow: hidden;
+}
+.topbox1{
+	height: 300px;
+	width: 1055px;
+	margin: 100px 55px;
+	margin-bottom: 20px;
+	background-color: white;
+}
+.usepart8>ul{
+	padding: 0;
+	margin:0;
+	list-style: none;
+}
+.usepart8>ul>li{
+	float: left;
+	margin-left: 20px;
+	height: 320px;
+	width: 250px;
+	background-color: white;
+}
+.usepart8>ul>li:nth-child(1){
+	margin-left:55px;
+}

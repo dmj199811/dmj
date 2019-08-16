@@ -1,0 +1,45 @@
+.subfield4{
+	width: 100%;
+	background-color: white;
+}
+.usepart6{
+	width: 1200px;
+	height: 450px;
+	background-color: #acbfce;
+	margin:0 auto;
+}
+.minibox{
+	float: left;
+	width: 205px;
+	height: 350px;
+	margin-left: 55px;
+	margin-top:75px;
+	box-sizing: border-box;
+	border:1px solid #eee;
+	background-color: white;
+/*	margin-top: 40px;
+	margin-left: 60px;*/
+}
+.usepart6>ul{	
+	float: left;
+	width: 850px;
+	padding: 0;
+	margin:0;
+	margin-top:75px;
+	list-style: none;
+	overflow: hidden;
+}
+.usepart6>ul>li{
+	float: left;
+	width: 425px;
+	box-sizing: border-box;
+	height: 175px;
+	background-color: white;
+	border:1px solid #eee;
+}
+/*.usepart6>ul>li:nth-child(1){
+	float: none;
+	width: 500px;
+	height: 200px;
+	background-color: white;
+}*/

@@ -1,0 +1,44 @@
+.subfield5{
+	width: 100%;
+	background-color: #cecac4;
+}
+.usepart7{
+	width: 1200px;
+	height: 450px;
+	background-color: white;
+	margin: 0 auto;
+}
+.mini-left1{
+	float: left;
+	height: 350px;
+	width: 205px;
+	margin-top: 75px;
+	margin-left:55px;
+	background-color: #acbfce
+}
+.usepart7>ul{
+	padding: 0;
+	margin:0;
+	width: 640px;
+	margin-top: 75px;
+	float: left;
+	list-style: none;
+
+}
+.usepart7>ul>li {
+	padding: 0;
+	margin:0;
+	height: 175px;
+	width: 320px;
+	border:1px solid #eee;
+	box-sizing: border-box;
+	float: left;
+	background-color: #acbfce
+}
+.mini-right1{
+	float: left;
+	height: 350px;
+	margin-top: 75px;
+	width: 205px;
+	background-color: #acbfce
+}

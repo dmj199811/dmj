@@ -1,0 +1,34 @@
+.subfield14{
+	width: 100%;
+	background-color: white;
+}
+.usepart16{
+	width: 1200px;
+	height: 500px;
+	margin:0 auto;
+	background-color: #cecac4;
+	overflow: hidden;
+}
+.bottom-mini-box1{
+	float: left;
+	height: 355px;
+	width: 600px;
+	margin:100px 55px;
+	margin-right: 15px;
+	margin-bottom: 0px;
+	background-color: white;
+}
+.bottom-mini-box2{
+	float: left;
+	height: 170px;
+	width: 440px;
+	margin-top: 100px;
+	margin-bottom: 15px;
+	background-color: white;
+}
+.bottom-mini-box3{
+	float: left;
+	height: 170px;
+	width: 440px;
+	background-color: white;
+}

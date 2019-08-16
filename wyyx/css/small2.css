@@ -1,0 +1,60 @@
+.box2{
+	width: 100%;
+	background-color:white;
+}
+.small2{
+	position: relative;
+	height: 120px;
+	width: 1200px;
+	margin:0 auto;
+}
+.logo1{
+	position: absolute;
+	top: 20px;
+	left: 40px;
+	height: 60px;
+	width: 120px;
+}
+.inputpart1{
+	position: absolute;
+	top: 20px;
+	left: 400px;
+	height: 80px;
+	width: 500px;
+	}
+.inputpart1>input{
+	height: 48px;
+	width: 500px;
+	border-radius: 25px;
+	background-color: white;
+}
+.inputpart1>.ssseeess{
+	position: absolute;
+	top: 15px;
+	left: 5px;
+}
+.inputpart1>.eeessseee{
+	position: absolute;
+	left: 426px;
+	top: 2px;
+	text-align: center;
+	line-height: 52px;
+	color: white;
+	box-shadow: 0 0 2px #b4a078;
+	height: 52px;
+	width: 80px;
+	background-color: #b4a078;
+	border-radius:0 25px 25px 0;
+}
+.shoppingpart1{
+	position: absolute;
+	top: 20px;
+	left: 950px;
+	height: 48px;
+	width: 180px;
+	color: #b4a078;
+	text-align: center;
+	line-height: 48px;	
+	border:1px solid #b4a078;
+	border-radius: 24px;
+}
