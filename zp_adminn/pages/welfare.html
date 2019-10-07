@@ -1,0 +1,164 @@
+<style type="text/css">
+	p{
+		cursor: pointer;
+	}
+	.p1{
+		background-color:green;
+		padding:0 4px;
+		display: inline-block;
+		color:white;
+		margin:0;
+	}
+	.p2{
+		background-color:#ff6600;
+		padding:0 4px;
+		display: inline-block;
+		color:white;
+		margin:0;
+	}
+</style>
+<div>
+	<div class="container-fluid">
+    	<div class="row">
+	    	<div class="col-2" style="margin-bottom: 10px;">
+					<select class="top-select custom-select" id="top_sel">
+						<option value="" style="display: none" selected>全部</option>
+					</select>
+			</div>
+		</div>
+	</div>
+	<table class="table table-hover">
+	  <thead class="thead-dark">
+	    <tr>
+	      <th class="col-1">#</th>
+	      <th class="col-9">福利名称</th>
+	      <th class="col-1">状态</th>
+	      <th class="col-1">操作</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    
+	  </tbody>
+	</table>
+</div>
+<script type="text/javascript">
+	var baseURL = 'http://47.106.244.1:7777';
+	//去重函数
+	function remove_same(arr){
+		var temp = []; //一个新的临时数组
+	    for(var i = 0; i < arr.length; i++){
+	        if(temp.indexOf(arr[i]) == -1){
+	            temp.push(arr[i]);
+	        }
+	    }
+	    return temp;
+	}
+	//重载下拉框
+	function optionReload(){
+		var url = baseURL + '/Welfare/findAll';
+		$.get(url,function(result){
+			if(result.status===200){
+				$('.top-select').empty()
+				var data1 = result.data
+				var e = [] 
+				data1.forEach(function(item){  
+					e.push(item.name)
+				})
+				var loc = remove_same(e);
+				// $(".scale2").find("option").remove();
+				loc.forEach(function(item){
+					$(`<option value="`+item+`">`+item+`</option>`).appendTo('.top-select')
+				})
+				$(`<option value="" style="display: none" selected>全部</option>`).appendTo('.top-select')
+			}
+		})
+	}
+	optionReload()
+	//下拉框选中改变
+	$('.top-select').on('change',function(){
+		var url = baseURL + '/Welfare/findAll';
+		$.get(url,function(result){
+			$('tbody').empty()
+			result.data.forEach(function(item){
+				console.log(item.name)
+				console.log($('.top-select').val())
+				if (item.name===$('.top-select').val()){
+					if(item.status=='使用中'){
+						$(`
+						<tr>
+					      <td><input type="checkbox" value="`+item.id+`"/></td>
+					      <td>`+item.name+`</td>
+					      <td>`+item.status+`</td>
+					      <td><p class='p1'>冻结</p></td>
+					    </tr>
+						`).appendTo('tbody')
+					}else{
+						$(`
+						<tr>
+					      <td><input type="checkbox" value="`+item.id+`"/></td>
+					      <td>`+item.name+`</td>
+					      <td>`+item.status+`</td>
+					      <td><p class='p2'>恢复</p></td>
+					    </tr>
+						`).appendTo('tbody')
+					}
+				}
+			})
+		})
+	})
+	//操作
+	$('tbody').on('click','p',function(){
+		var url=baseURL+'/Welfare/saveOrUpdate';
+		if($(this).text()=='冻结'){
+			var data = {
+				id:$(this).parents('tr').children().eq(0).children().eq(0).val(),
+				name:$(this).parents('tr').children().eq(1).text(),
+				status:"被冻结",
+			}
+		}else{
+			var data = {
+				id:$(this).parents('tr').children().eq(0).children().eq(0).val(),
+				name:$(this).parents('tr').children().eq(1).text(),
+				status:"使用中",
+			}
+		}
+		console.log(data)
+		$.post(url,data,function(result){
+			if(result.status==200){
+				reloadData()
+			}else{
+				alert('操作失败')
+			}
+		})
+	})
+	//重载数据
+	function reloadData(){
+		var url = baseURL+'/Welfare/findAll';
+		$.get(url,function(result){
+			$('tbody').empty()
+			result.data.forEach(function(item){
+				if(item.status=='使用中'){
+					$(`
+					<tr>
+				      <td><input type="checkbox" value="`+item.id+`"/></td>
+				      <td>`+item.name+`</td>
+				      <td>`+item.status+`</td>
+				      <td><p class='p1'>冻结</p></td>
+				    </tr>
+					`).appendTo('tbody')
+				}else{
+					$(`
+					<tr>
+				      <td><input type="checkbox" value="`+item.id+`"/></td>
+				      <td>`+item.name+`</td>
+				      <td>`+item.status+`</td>
+				      <td><p class='p2'>恢复</p></td>
+				    </tr>
+					`).appendTo('tbody')
+				}
+				
+			})
+		})
+	}
+	reloadData()
+</script>

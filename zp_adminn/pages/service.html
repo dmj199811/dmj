@@ -1,0 +1,280 @@
+<style type="text/css">
+	.RRR{
+		margin:15px;
+		border-top: 2px solid #3366ff;
+		display: inline-block;	
+		width: 	150px;
+		text-align: center;	
+		height: 50px;
+		line-height: 50px;
+		font-size: 	20px;
+	}
+	.select1{
+		margin-bottom: 20px;
+	}
+	.modal-backdrop.show{
+	z-index: -1;
+	}
+	.show{
+		background:rgba(139,126,102,0.5);
+	}
+	#modal-top{
+		padding-top: 60px;
+	}
+</style>
+<div class="main" style="position:relative;">
+	<!-- toast框开始 -->
+	<div aria-live="polite" aria-atomic="true" style="position: relative;">
+	  <div class="toast" style="position: absolute; top: 0; right: 0;">
+	    <div class="toast-header">
+	      <img src="..." class="rounded mr-2" alt="...">
+	      <strong class="mr-auto">提示</strong>
+	      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+	        <span aria-hidden="true">&times;</span>
+	      </button>
+	    </div>
+	    <div class="toast-body">
+	      Hello, world! This is a toast message.
+	    </div>
+	  </div>
+	</div>
+	<!-- toast框结束 -->
+	<h5 class="RRR">用户列表</h5>
+	<button type="button" class="btn btn-warning btn_add" style="position:absolute;top:20px;right:300px;">添加客户</button>
+	<div class="container-fluid select1">
+		<div class="row">	
+			<div class="col-2">
+				<select class="status-select custom-select" name="status">
+			      <option value="在线">在线</option>
+			      <option value="离线">离线</option>
+			   </select>
+			</div>
+			<div class="col-2">
+				<select class="gender-select custom-select" name="gender">
+			      <option value=""  style="display:none;" selected>性别</option>
+			      <option value="男">男</option>
+   				  <option value="女">女</option>
+			   </select>
+			</div>
+			<div class="col-4">
+				<div class="btn btn-primary btn_rel" style="margin-left: 20px;margin-right: 20px;height:37px;">重置</div>
+			</div>
+			<div class="col-4">
+				<div class="input-group mb-3">
+				  <input type="text" class="form-control top_int" placeholder="请输入关键字">
+				  <div class="input-group-append">
+				    <button class="btn btn-outline-secondary" type="button" id="top_sea">搜索</button>
+				  </div>
+				</div>
+			</div>
+		</div>	
+	</div>
+	<!-- 表开始 -->
+	<table class="table text-center table-hover">
+	  <thead class="thead-dark">
+	    <tr>
+	      <th scope="col">#</th>
+	      <th scope="col">用户名</th>
+	      <th scope="col">姓名</th>
+	      <th scope="col">姓别</th>
+	      <th scope="col">状态</th>
+	      <th scope="col">操作</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+  	  </tbody>
+	</table>
+	<!-- 表结束 -->
+	<!-- 模态框开始 -->
+	<div class="modal" id="modal-top" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" style="max-width:800px;">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">添加客服</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	  <div class="form-group row">
+			    <label for="username" class="col-sm-2 text-center col-form-label">手机号</label>
+			    <div class="col-sm-10">
+			      <input type="text" class="form-control" id="username" placeholder="请输入手机号">
+			    </div>
+			  </div>
+			  <div class="form-group row">
+			    <label for="realname" class="col-sm-2 text-center col-form-label">姓名</label>
+			    <div class="col-sm-10">
+			      <input type="text" class="form-control" id="realname" placeholder="请输入姓名">
+			    </div>
+			  </div>
+			  <!--  -->
+			   <fieldset class="form-group">
+			    <div class="row">
+			      <legend class="col-form-label col-sm-2 text-center">性别</legend>
+			      <div class="col-sm-10">
+			        <div class="form-check form-check-inline" style="padding-top:8px;">
+			          <input class="form-check-input" type="radio" name="gender" id="gender" value="男" checked>
+			          <label class="form-check-label" for="gridRadios1">
+			            男
+			          </label>
+			        </div>
+			        <div class="form-check form-check-inline">
+			          <input class="form-check-input" type="radio" name="gender" id="gender" value="女">
+			          <label class="form-check-label" for="gridRadios2">
+			            女
+			          </label>
+			        </div>
+			      </div>
+			    </div>
+			  </fieldset>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+	        <button type="button" class="btn btn-primary data_submit">提交</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- 模态框结束 -->
+</div>
+<script type="text/javascript">
+	var baseURL= "http://47.106.244.1:7777";
+	//模糊查询
+	$('#top_sea').on('click',function(){
+		var ds = $('.top_int').val()
+		var url = baseURL + '/CustomerService/findAll';
+		$.get(url,function(result){
+			$('tbody').empty()
+			result.data.forEach(function(item){
+				console.log(item.username)
+				if(item.username.toLowerCase().indexOf(ds.toLowerCase())>=0&&(item.username)){
+					$(`
+					<tr>
+				      <td><input type="checkbox" value="`+item.id+`"/></td>
+				      <td>`+item.username+`</td>
+				      <td>`+item.realname+`</td>
+				      <td>`+item.gender+`</td>
+				      <td>`+item.status+`</td>
+				      <td><a href="javascript:void(0)" class="btn_del">删除</a></td>
+				   </tr>
+					`).appendTo('tbody')	
+				}
+			})
+		})
+	})
+	//重置按钮
+	$('.btn_rel').on('click',function(){
+		reloadData();
+	})
+	//添加功能
+	$('.btn_add').on('click',function(){
+		$('#modal-top').modal('show')
+		$('#username').val("");
+		$('#realname').val("");
+	})
+	//提交按钮
+	$('.data_submit').on('click',function(){
+		var url = baseURL+'/CustomerService/saveOrUpdate';
+			var data = {
+			username:$('#username').val(),
+			realname:$('#realname').val(),
+			gender:$('#gender').val(),
+			status:'在线'
+			}
+		$.post(url,data,function(result){
+			console.log(data)
+			if(result.status==200){
+				toast('提交成功')
+				reloadData()
+				$('#modal-top').modal('hide')
+			}else{
+				alert('提交失败')
+			}
+		})
+	})
+	//删除功能
+	$('tbody').on('click','.btn_del',function(){
+		var url = baseURL+'/CustomerService/deleteById';
+		var data = {
+			id:$(this).parents('tr').children().eq(0).children().eq(0).val(),
+		}
+		$.post(url,data,function(result){
+			if(result.status===200){
+				reloadData()
+				console.log(data)
+				toast('删除成功')
+			}else{
+				alert('删除失败')
+			}
+		})
+	})
+	//toast框弹出
+	function toast(message){
+		$('.toast').toast('show')
+		$('.toast-body').text(message)
+	}
+	//下拉框改变加载数据
+	$('.status-select').on('change',function(){
+		var url = baseURL+'/CustomerService/findByEducation'
+		var data = {
+			status:$('.status-select').val()
+		}
+		$.get(url,data,function(result){
+			$('tbody').empty()
+			result.data.forEach(function(item){
+				$(`
+					<tr>
+				      <td><input type="checkbox" value="`+item.id+`"/></td>
+				      <td>`+item.username+`</td>
+				      <td>`+item.realname+`</td>
+				      <td>`+item.gender+`</td>
+				      <td>`+item.status+`</td>
+				      <td><a href="javascript:void(0)" class="btn_del">删除</a></td>
+				   </tr>
+					`).appendTo('tbody')	
+			})
+		})
+	})
+	$('.gender-select').on('change',function(){
+		var url = baseURL+'/CustomerService/findByGender'
+		var data = {
+			gender:$('.gender-select').val()
+		}
+		$.get(url,data,function(result){
+			$('tbody').empty()
+			result.data.forEach(function(item){
+				$(`
+					<tr>
+				      <td><input type="checkbox" value="`+item.id+`"/></td>
+				      <td>`+item.username+`</td>
+				      <td>`+item.realname+`</td>
+				      <td>`+item.gender+`</td>
+				      <td>`+item.status+`</td>
+				      <td><a href="javascript:void(0)" class="btn_del">删除</a></td>
+				   </tr>
+					`).appendTo('tbody')	
+			})
+		})
+	})
+	//重载数据
+	function reloadData(){
+		var url = baseURL+'/CustomerService/findAll'
+		$.get(url,function(result){
+			$('tbody').empty()
+			result.data.forEach(function(item){
+				$(`
+					<tr>
+				      <td><input type="checkbox" value="`+item.id+`"/></td>
+				      <td>`+item.username+`</td>
+				      <td>`+item.realname+`</td>
+				      <td>`+item.gender+`</td>
+				      <td>`+item.status+`</td>
+				      <td><a href="javascript:void(0)" class="btn_del">删除</a></td>
+				   </tr>
+					`).appendTo('tbody')
+			})
+		})
+	}
+	reloadData()
+</script>

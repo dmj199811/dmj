@@ -1,0 +1,866 @@
+<style type="text/css">
+.modal-backdrop.show{
+	z-index: -1;
+}
+.show{
+	background:rgba(139,126,102,0.5);
+}
+#modal-int,#modal_det{
+	padding-top: 60px;
+}
+p{
+	color: white;
+	display: inline-block;
+	margin: 0 5px;
+	padding:0 3px;
+	cursor:pointer;
+}
+</style>
+<div class="main" style=" position:relative;">
+<div class="layui-tab" >
+  <ul class="layui-tab-title">
+    <li class="layui-this">商家审核</li>
+    <li>招聘审核</li>
+  </ul>
+  <!-- toast框开始 -->
+	<div aria-live="polite" aria-atomic="true" style="position: relative;">
+	  <div class="toast" style="position: absolute; top: 0; right: 0;">
+	    <div class="toast-header">
+	      <img src="..." class="rounded mr-2" alt="...">
+	      <strong class="mr-auto">提示</strong>
+	      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+	        <span aria-hidden="true">&times;</span>
+	      </button>
+	    </div>
+	    <div class="toast-body">
+	      Hello, world! This is a toast message.
+	    </div>
+	  </div>
+	</div>
+<!-- toast框结束 -->
+  <div class="layui-tab-content">
+  	<!-- 页面1内容开始 -->
+    <div class="layui-tab-item layui-show">
+    	<div class="container-fluid">
+	    	<div class="row">
+		    	<div class="col-2" style="margin-bottom: 10px;">
+						<select class="custom-select" id="top_sel1">
+							<option value="" style="display: none" selected>全部</option>
+							<option value="3">待审核</option>
+							<option value="1">已通过</option>
+							<option value="2">已拒绝</option>
+						</select>
+				</div>
+				<div class="col-6">
+					<button class="btn btn-primary rel">重置</button>
+				</div>
+			</div>
+		 </div>
+		<!-- 表开始 -->
+		<table class="table text-center table-hover">
+		  <thead class="thead-dark">
+		    <tr>
+		      <th scope="col">#</th>
+		      <th scope="col">企业名称</th>
+		      <th scope="col">联系人</th>
+		      <th scope="col">联系方式</th>
+		      <th scope="col">行业</th>
+		      <th scope="col">所在地</th>
+		      <th scope="col">公司规模</th>
+		      <th scope="col">详情</th>
+		      <th scope="col">操作</th>
+		    </tr>
+		  </thead>
+		  <tbody class="tbody1">
+	  	  </tbody>
+		</table>
+		<!-- 表结束 -->
+    </div>
+  	<!-- 页面1内容结束 -->
+  	<!-- 页面2内容开始 -->
+    <div class="layui-tab-item">
+	    <div class="container-fluid">
+	    	<div class="row">
+		    	<div class="col-2" style="margin-bottom: 10px;">
+						<select class="custom-select" id="top_sel">
+							<option value="" style="display: none" selected>职位类型</option>
+						</select>
+				</div>
+				<div class="col-6">
+					<button class="btn btn-primary rel">重置</button>
+				</div>
+				<div class="col-4">
+					<div class="input-group mb-3">
+					  <input type="text" class="form-control top_int" placeholder="请输入关键字">
+					  <div class="input-group-append">
+					    <button class="btn btn-outline-secondary" type="button" id="top_sea">搜索</button>
+					  </div>
+					</div>
+				</div>
+			</div>
+		 </div>
+    	<!-- 表开始 -->
+		<table class="table text-center table-hover">
+		  <thead class="thead-dark">
+		    <tr>
+		      <th scope="col">#</th>
+		      <th scope="col">招聘标题</th>
+		      <th scope="col">发布人</th>
+		      <th scope="col">联系方式</th>
+		      <th scope="col">职位</th>
+		      <th scope="col">发布时间</th>
+		      <th scope="col">详情</th>
+		      <th scope="col">状态</th>
+		    </tr>
+		  </thead>
+		  <tbody class="tbody2">
+	  	  </tbody>
+		</table>
+		<!-- 表结束 -->
+    </div>
+  	<!-- 页面2内容结束 -->
+  </div>
+</div>
+<!-- 模态框招聘审核开始 -->
+<div class="modal fade" id="modal_det" tabindex="-1" role="dialog" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">详情展示</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div class="contianer">
+      		<div class="row">
+      			<div class="col">
+   				   <div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text marked_use">id</span>
+						  </div>
+						  <input type="text" class="form-control" id="id2" readonly="">
+						</div>
+      			</div>
+      			<div class="col">
+      				<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text marked_use">title</span>
+						  </div>
+						  <input type="text" class="form-control" id="title2" readonly="">
+						</div>
+      			</div>
+      		</div>
+      		<div class="row">
+      			<div class="col">
+      				<div class="input-group mb-3">
+					  <div class="input-group-prepend">
+					    <span class="input-group-text marked_use">联系人</span>
+					  </div>
+					  <input type="text" class="form-control" id="contactName2" readonly="">
+					</div>
+      			</div>
+      			<div class="col">
+      				<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text marked_use">联系方式</span>
+						  </div>
+						  <input type="text" class="form-control" id="contactPhone2" readonly="">
+						</div>
+      			</div>
+      		</div>
+      		<div class="row">
+      			<div class="col">
+      				<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text marked_use">job</span>
+						  </div>
+						  <input type="text" class="form-control" id="job2" readonly="">
+						</div>
+      			</div>
+      			<div class="col">
+      				<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text marked_use">福利</span>
+						  </div>
+						  <input type="text" class="form-control" id="welfare2" readonly="">
+						</div>
+      				
+      			</div>
+      		</div>
+      		<div class="row">
+      			<div class="col">
+      				<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text marked_use">公司id</span>
+						  </div>
+						  <input type="text" class="form-control" id="businessId2" readonly="">
+						</div>
+      			</div>
+      			<div class="col">
+      				<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text marked_use">工资</span>
+						  </div>
+						  <input type="text" class="form-control" id="salary2" readonly="">
+						</div>
+      			</div>
+      		</div>
+      		<div class="row">
+      			<div class="col">
+      				<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text marked_use">状态</span>
+						  </div>
+						  <input type="text" class="form-control" id="status2" readonly="">
+						</div>
+      			</div>
+      			<div class="col">
+      				<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text marked_use">num</span>
+						  </div>
+						  <input type="text" class="form-control" id="num2" readonly="">
+						</div>
+      			</div>
+      		</div>
+      		<div class="row">
+      			<div class="col">
+      				<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text marked_use">发布时间</span>
+						  </div>
+						  <input type="text" class="form-control" id="publishTime2" readonly="">
+						</div>
+      			</div>
+      		</div>
+      		<div class="row">
+      			<div class="card" style="width: 100%;height:200px;">
+					  <div class="card-body">
+					    <h5 class="card-title">详细描述</h5>
+					    <p class="card-text"></p>
+					  </div>
+					</div>
+      		</div>
+      	</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 模态框结束 -->
+<!-- 模态框商家审核开始 -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" >
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">详情展示</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	<div class="contianer">
+	      		<div class="row">
+	      			<div class="col">
+	      				<div class="input-group mb-3">
+							  <div class="input-group-prepend">
+							    <span class="input-group-text marked_use">id</span>
+							  </div>
+							  <input type="text" class="form-control" id="id" readonly="">
+							</div>
+	      			</div>
+	      			<div class="col">
+	      				<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text marked_use">企业名称</span>
+						  </div>
+						  <input type="text" class="form-control" id="name" readonly="">
+						</div>
+	      			</div>
+	      		</div>
+	      		<div class="row">
+	      			<div class="col">
+	      				<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text marked_use">联系人</span>
+						  </div>
+						  <input type="text" class="form-control" id="contactName" readonly="">
+						</div>
+	      			</div>
+	      			<div class="col">
+	      				<div class="input-group mb-3">
+							  <div class="input-group-prepend">
+							    <span class="input-group-text marked_use">联系方式</span>
+							  </div>
+							  <input type="text" class="form-control" id="contactPhone" readonly="">
+							</div>
+	      			</div>
+	      		</div>
+	      		<div class="row">
+	      			<div class="col">
+	      				<div class="input-group mb-3">
+							  <div class="input-group-prepend">
+							    <span class="input-group-text marked_use">行业类型</span>
+							  </div>
+							  <input type="text" class="form-control" id="industry" readonly="">
+							</div>
+	      			</div>
+	      			<div class="col">
+	      				<div class="input-group mb-3">
+							  <div class="input-group-prepend">
+							    <span class="input-group-text marked_use">所在城市</span>
+							  </div>
+							  <input type="text" class="form-control" id="location" readonly="">
+							</div>
+	      			</div>
+	      		</div>
+	      		<div class="row">
+	      			<div class="col">
+	      				<div class="input-group mb-3">
+							  <div class="input-group-prepend">
+							    <span class="input-group-text marked_use">规模</span>
+							  </div>
+							  <input type="text" class="form-control" id="scale" readonly="">
+							</div>
+	      			</div>
+	      			<div class="col">
+	      				<div class="input-group mb-3">
+							  <div class="input-group-prepend">
+							    <span class="input-group-text marked_use">注册时间</span>
+							  </div>
+							  <input type="text" class="form-control" id="establishedTime" readonly="">
+							</div>
+	      			</div>
+	      		</div>
+	      		<div class="row">
+	      			<div class="col">
+	      				<div class="input-group mb-3">
+							  <div class="input-group-prepend">
+							    <span class="input-group-text marked_use">注册资本</span>
+							  </div>
+							  <input type="text" class="form-control" id="registeredCapital" readonly="">
+							</div>
+	      			</div>
+	      			<div class="col">
+	      				<div class="input-group mb-3">
+							  <div class="input-group-prepend">
+							    <span class="input-group-text marked_use">营业执照</span>
+							  </div>
+							  <input type="text" class="form-control" id="businessLicense" readonly="">
+							</div>
+	      			</div>
+	      		</div>
+	      		<div class="row">
+	      			<div class="card" style="width: 100%;height:200px;">
+						  
+						  <div class="card-body">
+						    <h5 class="card-title">详细描述</h5>
+						    <p class="card-text"></p>
+						  </div>
+						</div>
+	      		</div>
+	      	</div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- 模态框商家审核结束 -->
+</div>
+
+<script type="text/javascript">
+$(function(){
+	var baseURL = 'http://47.106.244.1:7777';
+	//模糊查询
+	$('#top_sea').on('click',function(){
+		var ds = $('.top_int').val()
+		var url = baseURL + '/Employment/findAll';
+		$.get(url,function(result){
+			$('tbody').empty()
+			result.data.forEach(function(item){
+				if(item.title.toLowerCase().indexOf(ds.toLowerCase())>=0&&(item.title)){
+					$(`
+						<tr>
+					      <td><input type="checkbox" value="`+item.id+`"/></td>
+					      <td>`+item.title+`</td>
+					      <td>`+item.contactName+`</td>
+					      <td>`+item.contactPhone+`</td>
+					      <td>`+item.job+`</td>
+					      <td>`+dateParse(item.publishTime)+`</td>
+					      <td><a class="btn_det" href="javascript:void(0)"  value='`+item.description+`'>查看</a></td>
+					      <td><a href="javascript:void(0)" class="btn_upt">修改</a>&nbsp<a href="javascript:void(0)" class="btn_del">删除</a></td>
+					   </tr>
+						`).appendTo('tbody')
+				}
+			})
+		})
+	})
+	//详情页面			
+	$('.tbody1').on('click','a',function(){
+		var url = baseURL+'/Business/findById'
+		var data = {
+			id:$(this).parents('tr').children().eq(0).children().eq(0).val()
+		}
+		$.get(url,data,function(result){
+			if(result.status===200){
+				$('#exampleModal').modal("show")
+				$("input[id='id']").val(result.data.id)
+				$("input[id='name']").val(result.data.name)
+				$("input[id='scale']").val(result.data.scale)
+				$("input[id='location']").val(result.data.location)
+				$("input[id='contactName']").val(result.data.contactName)
+				$("input[id='contactPhone']").val(result.data.contactPhone)
+				$("input[id='industry']").val(result.data.industry)
+				$("input[id='establishedTime']").val(result.data.establishedTime)
+				$("input[id='registeredCapital']").val(result.data.registeredCapital)
+				$("input[id='businessLicense']").val(result.data.businessLicense)
+				$('.card-text').text(result.data.description)
+			}
+		})
+
+	})
+	//重置
+	$('.rel').on('click',function(){
+		reloadData()
+		reloadData2()
+		$('#top_sel').append('<option value="loc_no" class="sel_loc" style="display:none;" selected>职位类型</option>')
+	})
+	//商家审核下拉框选中改变
+	$('#top_sel1').on('change',function(){
+		var url = baseURL+'/Business/findAll'; 
+		$.get(url,function(result){
+			$('.tbody1').empty()
+			result.data.forEach(function(item){
+				if($('#top_sel1').val()==1){
+					if(item.status=='审核通过'){
+						$(`<tr>
+					      <td><input type="checkbox" value="`+item.id+`"/></td>
+					      <td>`+item.name+`</td>
+					      <td>`+item.contactName+`</td>
+					      <td>`+item.contactPhone+`</td>
+					      <td>`+item.industry+`</td>
+					      <td>`+item.location+`</td>
+					      <td>`+item.scale+`</td>
+					      <td><a class="btn_det1" href="javascript:void(0)" value='`+item.description+`'>查看</a></td>
+					      <td style="color:green">审核通过</td>	
+				      </tr>
+							`).appendTo('.tbody1')
+					}
+				}else if($('#top_sel1').val()==2){
+					 if(item.status=='拒绝'){
+						$(`<tr>
+					      <td><input type="checkbox" value="`+item.id+`"/></td>
+					      <td>`+item.name+`</td>
+					      <td>`+item.contactName+`</td>
+					      <td>`+item.contactPhone+`</td>
+					      <td>`+item.industry+`</td>
+					      <td>`+item.location+`</td>
+					      <td>`+item.scale+`</td>
+					      <td><a class="btn_det1" href="javascript:void(0)" value='`+item.description+`'>查看</a></td>
+					      <td style="color:red">已拒绝</td>	
+				      </tr>
+							`).appendTo('.tbody1')
+					}
+				}else{
+					if(item.status!='拒绝'&&item.status!='审核通过'){
+						$(`<tr>
+					      <td><input type="checkbox" value="`+item.id+`"/></td>
+					      <td>`+item.name+`</td>
+					      <td>`+item.contactName+`</td>
+					      <td>`+item.contactPhone+`</td>
+					      <td>`+item.industry+`</td>
+					      <td>`+item.location+`</td>
+					      <td>`+item.scale+`</td>
+					      <td><a class="btn_det1" href="javascript:void(0)" value='`+item.description+`'>查看</a></td>
+					      <td><p style="background-color:green;" class="pass">通过</p><p style="background-color:red;" class="rej">拒绝</p></td>	
+				      </tr>
+							`).appendTo('.tbody1')
+					}
+				}
+			})
+		})
+	})
+	//去重函数
+	function remove_same(arr){
+		var temp = []; //一个新的临时数组
+	    for(var i = 0; i < arr.length; i++){
+	        if(temp.indexOf(arr[i]) == -1){
+	            temp.push(arr[i]);
+	        }
+	    }
+	    return temp;
+	}
+	//时间函数
+	var dateParse=(dataString)=>{
+	  if(dataString){
+	    let date = new Date(dataString);
+	    let Y = date.getFullYear() + '-';
+	    let M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+	    let D = (date.getDate()< 10 ? '0'+date.getDate() : date.getDate())+' ';
+	    let h = (date.getHours()< 10 ? '0'+date.getHours() : date.getHours())+ ':';
+	    let m = (date.getMinutes()< 10 ? '0'+date.getMinutes() : date.getMinutes())+ ':';
+	    let s = (date.getSeconds()< 10 ? '0'+date.getSeconds() : date.getSeconds());
+	    return Y+M+D+h+m+s;
+	  }else{
+	    return '';
+	  }
+	}
+	//toast提示框
+	function toast(message){
+		$('.toast').toast('show')
+		$('.toast-body').text(message)
+	}
+	//通过按钮
+	$('.tbody1').on('click','.pass',function(){
+		console.log(1)
+		var url = baseURL+'/Business/findById';
+		var data={
+			id:$(this).parents('tr').children().eq(0).children().eq(0).val()
+		}
+		$.get(url,data,function(result){
+			var url2 = baseURL+'/Business/saveOrUpdate';
+			var ds =result.data;
+			var data2 = {
+				id:ds.id,
+				name:result.data.name,
+				contactName:result.data.contactName,
+				contactPhone:result.data.contactPhone,
+				industry:result.data.industry,
+				location:result.data.location,
+				scale:result.data.scale,
+				establishedTime:ds.establishedTime,
+				registeredCapital:ds.registeredCapital,	
+				description:result.data.description,
+				businessLicense:'11',
+				status:"审核通过",
+			}
+			console.log(data2)
+			$.post(url2,data2,function(result){
+					if(result.status==200){
+						console.log(2)
+						reloadData()
+					}else{
+						alert('修改失败')
+					}
+			})
+		})
+	})
+	//拒绝按钮
+	$('.tbody1').on('click','.rej',function(){
+		console.log(1)
+		var url = baseURL+'/Business/findById';
+		var data={
+			id:$(this).parents('tr').children().eq(0).children().eq(0).val()
+		}
+		$.get(url,data,function(result){
+			var url2 = baseURL+'/Business/saveOrUpdate';
+			var ds =result.data;
+			var data2 = {
+				id:ds.id,
+				name:result.data.name,
+				contactName:result.data.contactName,
+				contactPhone:result.data.contactPhone,
+				industry:result.data.industry,
+				location:result.data.location,
+				scale:result.data.scale,
+				establishedTime:ds.establishedTime,
+				registeredCapital:ds.registeredCapital,	
+				description:result.data.description,
+				businessLicense:'11',
+				status:"已拒绝",
+			}
+			console.log(data2)
+			$.post(url2,data2,function(result){
+					if(result.status==200){
+						console.log(2)
+						reloadData()
+					}else{
+						alert('修改失败')
+					}
+			})
+		})
+	})
+	//通过按钮
+	$('.tbody2').on('click','.pass2',function(){
+		console.log(1)
+		var url = baseURL+'/Employment/findById';
+		var data={
+			id:$(this).parents('tr').children().eq(0).children().eq(0).val()
+		}
+		$.get(url,data,function(result){
+			var url2 = baseURL+'/Employment/saveOrUpdate';
+			var ds =result.data;
+			var data2 = {
+				id:ds.id,
+				title:ds.title,
+				job:ds.job,
+				num:ds.num,
+				businessId:ds.businessId,
+				salary:ds.salary,
+				welfare:ds.welfare,
+				description:ds.description,
+				status:ds.status,
+				workingHours:ds.workingHours,
+				contactName:ds.contactName,
+				contactPhone:ds.contactPhone,
+				auditStatus:'审核通过',
+			}
+			console.log(data2)
+			$.post(url2,data2,function(result){
+					if(result.status==200){
+						console.log(2)
+						reloadData2()
+					}else{
+						alert('修改失败')
+					}
+			})
+		})
+	})
+	//拒绝按钮
+	$('.tbody2').on('click','.rej2',function(){
+		console.log(1)
+		var url = baseURL+'/Employment/findById';
+		var data={
+			id:$(this).parents('tr').children().eq(0).children().eq(0).val()
+		}
+		$.get(url,data,function(result){
+			var url2 = baseURL+'/Employment/saveOrUpdate';
+			var ds =result.data;
+			var data2 = {
+				id:ds.id,
+				title:ds.title,
+				job:ds.job,
+				num:ds.num,
+				businessId:ds.businessId,
+				salary:ds.salary,
+				welfare:ds.welfare,
+				description:ds.description,
+				status:ds.status,
+				workingHours:ds.workingHours,
+				contactName:ds.contactName,
+				contactPhone:ds.contactPhone,
+				auditStatus:'已拒绝',
+			}
+			console.log(data2)
+			$.post(url2,data2,function(result){
+					if(result.status==200){
+						console.log(2)
+						reloadData2()
+					}else{
+						alert('修改失败')
+					}
+			})
+		})
+	})
+	//招聘管理模糊查询
+	$('#top_sea').on('click',function(){
+		console.log(1)
+		var ds = $('.top_int').val()
+		var url = baseURL + '/Employment/findAll';
+		$.get(url,function(result){
+			$('.tbody2').empty()
+			result.data.forEach(function(item){
+				if(item.title.toLowerCase().indexOf(ds.toLowerCase())>=0&&(item.title)){
+					$(`
+						<tr>
+					      <td><input type="checkbox" value="`+item.id+`"/></td>
+					      <td>`+item.title+`</td>
+					      <td>`+item.contactName+`</td>
+					      <td>`+item.contactPhone+`</td>
+					      <td>`+item.job+`</td>
+					      <td>`+dateParse(item.publishTime)+`</td>
+					      <td><a class="btn_det" href="javascript:void(0)"  value='`+item.description+`'>查看</a></td>
+					      <td><a href="javascript:void(0)" class="btn_upt">修改</a>&nbsp<a href="javascript:void(0)" class="btn_del">删除</a></td>
+					   </tr>
+						`).appendTo('tbody')
+				}
+			})
+		})
+	})
+	//重载下拉框招聘
+	function optionReload2(){
+		var url = baseURL + '/Jobs/findAll';
+		$.get(url,function(result){
+			if(result.status===200){
+				$('.job-select').empty()
+				var data1 = result.data
+				var f = [] 
+				data1.forEach(function(item){  
+					f.push(item.name)
+				})
+				var jon = remove_same(f);
+				// $(".scale2").find("option").remove();
+				jon.forEach(function(item){
+					$(`<option value="`+item+`">`+item+`</option>`).appendTo('#top_sel')
+				})
+			}
+		})
+	}
+	optionReload2()
+	//职位下拉框选中改变
+	$('#top_sel').on('change',function(){
+		var url = baseURL+'/Employment/findByJob'
+		var data = {
+			job:$('#top_sel').val()
+		}
+		console.log(data)
+		$.get(url,data,function(result){
+			if (result.status===200) {
+				$('.tbody2').empty()
+				console.log(result.data)
+				result.data.forEach(function(item){
+				if(item.auditStatus=='审核通过'){
+					$(`
+						<tr>
+					      <td><input type="checkbox" value="`+item.id+`"/></td>
+					      <td>`+item.title+`</td>
+					      <td>`+item.contactName+`</td>
+					      <td>`+item.contactPhone+`</td>
+					      <td>`+item.job+`</td>
+					      <td>`+dateParse(item.publishTime)+`</td>
+					      <td><a class="btn_det" href="javascript:void(0)"  value='`+item.description+`'>查看</a></td>
+					      <td style="color:green">审核通过</td>	
+					   </tr>
+						`).appendTo('.tbody2')
+				}else if(item.auditStatus=='已拒绝'){
+					$(`
+						<tr>
+					      <td><input type="checkbox" value="`+item.id+`"/></td>
+					      <td>`+item.title+`</td>
+					      <td>`+item.contactName+`</td>
+					      <td>`+item.contactPhone+`</td>
+					      <td>`+item.job+`</td>
+					      <td>`+dateParse(item.publishTime)+`</td>
+					      <td><a class="btn_det" href="javascript:void(0)" value='`+item.description+`'>查看</a></td>
+					      <td style="color:red">已拒绝</td>
+					   </tr>
+						`).appendTo('.tbody2')
+				}else{
+						$(`
+							<tr>
+						      <td><input type="checkbox" value="`+item.id+`"/></td>
+						      <td>`+item.title+`</td>
+						      <td>`+item.contactName+`</td>
+						      <td>`+item.contactPhone+`</td>
+						      <td>`+item.job+`</td>
+						      <td>`+dateParse(item.publishTime)+`</td>
+						      <td><a class="btn_det" href="javascript:void(0)" value='`+item.description+`'>查看</a></td>
+						      <td><p style="background-color:green;" class="pass2">通过</p><p style="background-color:red;" class="rej2">拒绝</p></td>
+						   </tr>
+							`).appendTo('.tbody2')
+				}
+				})
+			}else{
+				alert('失败')
+			}
+		})
+	})
+	//重载数据商家管理
+	function reloadData(){
+		var url = baseURL+'/Business/findAll';
+		$.get(url,function(result){
+			$('.tbody1').empty()
+			result.data.forEach(function(item){
+				if(item.status=='审核通过'){
+					$(`<tr>
+				      <td><input type="checkbox" value="`+item.id+`"/></td>
+				      <td>`+item.name+`</td>
+				      <td>`+item.contactName+`</td>
+				      <td>`+item.contactPhone+`</td>
+				      <td>`+item.industry+`</td>
+				      <td>`+item.location+`</td>
+				      <td>`+item.scale+`</td>
+				      <td><a class="btn_det1" href="javascript:void(0)" value='`+item.description+`'>查看</a></td>
+				      <td style="color:green">审核通过</td>	
+			      </tr>
+						`).appendTo('.tbody1')
+				}else if(item.status=='拒绝'){
+					$(`<tr>
+				      <td><input type="checkbox" value="`+item.id+`"/></td>
+				      <td>`+item.name+`</td>
+				      <td>`+item.contactName+`</td>
+				      <td>`+item.contactPhone+`</td>
+				      <td>`+item.industry+`</td>
+				      <td>`+item.location+`</td>
+				      <td>`+item.scale+`</td>
+				      <td><a class="btn_det1" href="javascript:void(0)" value='`+item.description+`'>查看</a></td>
+				      <td style="color:red">已拒绝</td>	
+			      </tr>
+						`).appendTo('.tbody1')
+				}else{
+					$(`<tr>
+				      <td><input type="checkbox" value="`+item.id+`"/></td>
+				      <td>`+item.name+`</td>
+				      <td>`+item.contactName+`</td>
+				      <td>`+item.contactPhone+`</td>
+				      <td>`+item.industry+`</td>
+				      <td>`+item.location+`</td>
+				      <td>`+item.scale+`</td>
+				      <td><a class="btn_det1" href="javascript:void(0)" value='`+item.description+`'>查看</a></td>
+				      <td><p style="background-color:green;" class="pass">通过</p><p style="background-color:red;" class="rej">拒绝</p></td>	
+			      </tr>
+						`).appendTo('.tbody1')
+				}
+			})
+			
+		})
+	}
+	reloadData()
+	//重载数据招聘管理
+	function reloadData2(){
+		var url = baseURL+'/Employment/findAll';
+		$.get(url,function(result){
+			$('.tbody2').empty()
+			result.data.forEach(function(item){
+				if(item.auditStatus=='审核通过'){
+				$(`
+					<tr>
+				      <td><input type="checkbox" value="`+item.id+`"/></td>
+				      <td>`+item.title+`</td>
+				      <td>`+item.contactName+`</td>
+				      <td>`+item.contactPhone+`</td>
+				      <td>`+item.job+`</td>
+				      <td>`+dateParse(item.publishTime)+`</td>
+				      <td><a class="btn_det" href="javascript:void(0)"  value='`+item.description+`'>查看</a></td>
+				      <td style="color:green">审核通过</td>	
+				   </tr>
+					`).appendTo('.tbody2')
+			}else if(item.auditStatus=='已拒绝'){
+				$(`
+					<tr>
+				      <td><input type="checkbox" value="`+item.id+`"/></td>
+				      <td>`+item.title+`</td>
+				      <td>`+item.contactName+`</td>
+				      <td>`+item.contactPhone+`</td>
+				      <td>`+item.job+`</td>
+				      <td>`+dateParse(item.publishTime)+`</td>
+				      <td><a class="btn_det" href="javascript:void(0)" value='`+item.description+`'>查看</a></td>
+				      <td style="color:red">已拒绝</td>
+				   </tr>
+					`).appendTo('.tbody2')
+			}else{
+					$(`
+						<tr>
+					      <td><input type="checkbox" value="`+item.id+`"/></td>
+					      <td>`+item.title+`</td>
+					      <td>`+item.contactName+`</td>
+					      <td>`+item.contactPhone+`</td>
+					      <td>`+item.job+`</td>
+					      <td>`+dateParse(item.publishTime)+`</td>
+					      <td><a class="btn_det" href="javascript:void(0)" value='`+item.description+`'>查看</a></td>
+					      <td><p style="background-color:green;" class="pass2">通过</p><p style="background-color:red;" class="rej2">拒绝</p></td>
+					   </tr>
+						`).appendTo('.tbody2')
+			}
+			})
+			
+		})
+	}
+	reloadData2()
+})
+</script>

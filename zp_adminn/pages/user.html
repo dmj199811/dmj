@@ -1,0 +1,410 @@
+<style type="text/css">
+	.RRR{
+		margin:15px;
+		border-top: 2px solid #3366ff;
+		display: inline-block;	
+		width: 	150px;
+		text-align: center;	
+		height: 50px;
+		line-height: 50px;
+		font-size: 	20px;
+	}
+	.select1{
+		margin-bottom: 20px;
+	}
+	.modal-backdrop.show{
+	z-index: -1;
+	}
+	.show{
+		background:rgba(139,126,102,0.5);
+	}
+	#modal-top{
+		padding-top: 60px;
+	}
+</style>
+<div class="main" style="position:relative;">
+	<!-- toast框开始 -->
+	<div aria-live="polite" aria-atomic="true" style="position: relative;">
+	  <div class="toast" style="position: absolute; top: 0; right: 0;">
+	    <div class="toast-header">
+	      <img src="..." class="rounded mr-2" alt="...">
+	      <strong class="mr-auto">提示</strong>
+	      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+	        <span aria-hidden="true">&times;</span>
+	      </button>
+	    </div>
+	    <div class="toast-body">
+	      Hello, world! This is a toast message.
+	    </div>
+	  </div>
+	</div>
+	<!-- toast框结束 -->
+	<h5 class="RRR">用户列表</h5>
+	<button type="button" class="btn btn-warning btn_add" style="position:absolute;top:20px;right:300px;">添加用户</button>
+	<div class="container-fluid select1">
+		<div class="row">	
+			<div class="col-2">
+				<select class="education-select custom-select" name="educa">
+			      <option value="" class="sel_loc" style="display:none;" selected>学历</option>
+			   </select>
+			</div>
+			<div class="col-2">
+				<select class="gender-select custom-select" name="gender">
+			      <option value=""  style="display:none;" selected>性别</option>
+			      <option value="男">男</option>
+   				  <option value="女">女</option>
+			   </select>
+			</div>
+			<div class="col-4">
+				<div class="btn btn-primary btn_rel" style="margin-left: 20px;margin-right: 20px;height:37px;">重置</div>
+			</div>
+			<div class="col-4">
+				<div class="input-group mb-3">
+				  <input type="text" class="form-control top_int" placeholder="请输入关键字">
+				  <div class="input-group-append">
+				    <button class="btn btn-outline-secondary" type="button" id="top_sea">搜索</button>
+				  </div>
+				</div>
+			</div>
+		</div>	
+	</div>
+	<!-- 表开始 -->
+	<table class="table text-center table-hover">
+	  <thead class="thead-dark">
+	    <tr>
+	      <th scope="col">#</th>
+	      <th scope="col">用户名</th>
+	      <th scope="col">姓名</th>
+	      <th scope="col">手机号</th>
+	      <th scope="col">性别</th>
+	      <th scope="col">出生年月</th>
+	      <th scope="col">最高学历</th>
+	      <th scope="col">操作</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+  	  </tbody>
+	</table>
+	<!-- 表结束 -->
+	<!-- 模态框开始 -->
+	<div class="modal" id="modal-top" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content noopacity">
+	      <div class="modal-header">
+	        <h5 class="modal-title">修改信息</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	<input type="hidden" class="form-control" id="id">
+	      	  <div class="container-fluid">
+	      	  	<div class="row">
+		         	<div class="input-group mb-3 col">
+					  <div class="input-group-prepend">
+					    <span class="input-group-text marked_use">姓名</span>
+					  </div>
+					  <input type="text" class="form-control" id="realname">
+					</div>
+					<div class="input-group mb-3 col ">
+					  <div class="input-group-prepend">
+					    <span class="input-group-text marked_use">出生年月</span>
+					  </div>
+					  <input type="text" class="form-control" id="birth">
+					</div>
+				</div>
+			  </div>
+			  <div class="container-fluid">
+	      	  	 <div class="row">
+		         	<div class="input-group mb-3 col">
+					  <div class="input-group-prepend">
+					    <span class="input-group-text marked_use">学历</span>
+					  </div>
+					  <input type="text" class="form-control" id="education">
+					</div>
+					<div class="input-group mb-3 col">
+					  <div class="input-group-prepend">
+					    <span class="input-group-text marked_use">联系方式</span>
+					  </div>
+					  <input type="text" class="form-control" id="telephone">
+				</div>
+			  </div>
+			  <div class="container-fluid">
+	      	  	 <div class="row">
+		         	<div class="input-group mb-3 col">
+					  <div class="input-group-prepend">
+					    <span class="input-group-text marked_use">性别</span>
+					  </div>
+					  <input type="text" class="form-control" id="gender">
+					</div>
+					<div class="input-group mb-3 col">
+					  <div class="input-group-prepend">
+					    <span class="input-group-text marked_use">求职状态</span>
+					  </div>
+					  <input type="text" class="form-control" id="currentStatus">
+					</div>
+				</div>
+			  </div>
+			  <div class="container-fluid">
+	      	  	 <div class="row">
+		         	<div class="input-group mb-3 col">
+					  <div class="input-group-prepend">
+					    <span class="input-group-text marked_use">简历</span>
+					  </div>
+					  <input type="text" class="form-control" id="resume">
+					</div>
+					<div class="input-group mb-3 col">
+					  <div class="input-group-prepend">
+					    <span class="input-group-text marked_use">用户名</span>
+					  </div>
+					  <input type="text" class="form-control" id="username">
+					</div>
+				</div>
+			  </div>
+			  <div class="input-group mb-3 col">
+					  <div class="input-group-prepend">
+					    <span class="input-group-text marked_use">工作时间</span>
+					  </div>
+					  <input type="text" class="form-control" id="workTime">
+					</div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+	        <button type="button" class="btn btn-primary data_submit">提交</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- 模态框结束 -->
+</div>
+<script type="text/javascript">
+	var baseURL= "http://47.106.244.1:7777";
+	//模糊查询
+	$('#top_sea').on('click',function(){
+		var ds = $('.top_int').val()
+		var url = baseURL + '/Jobhunter/findAll';
+		$.get(url,function(result){
+			$('tbody').empty()
+			result.data.forEach(function(item){
+				if(item.username.toLowerCase().indexOf(ds.toLowerCase())>=0&&(item.username)){
+					$(`
+						<tr>
+					      <td><input type="checkbox" value="`+item.id+`"/></td>
+					      <td>`+item.username+`</td>
+					      <td>`+item.realname+`</td>
+					      <td>`+item.telephone+`</td>
+					      <td>`+item.gender+`</td>
+					      <td>`+item.birth+`</td>
+					      <td>`+item.education+`</td>
+					      <td><a href="javascript:void(0)" class="btn_upt">修改</a>&nbsp<a href="javascript:void(0)" class="btn_del">删除</a></td>
+					   </tr>
+						`).appendTo('tbody')
+				}
+			})
+		})
+	})
+	//重置按钮
+	$('.btn_rel').on('click',function(){
+		reloadData();
+		reloadSelect();
+	})
+	//修改功能
+	$('tbody').on('click','.btn_upt',function(){
+		console.log(1)
+		var url = baseURL+'/Jobhunter/findById';
+		var data = {
+			id:$(this).parents('tr').children().eq(0).children().eq(0).val(),
+		}
+		$.get(url,data,function(result){
+			$('#modal-top').modal('show')
+			$('#id').val(result.data.id);
+			$('#realname').val(result.data.realname);
+			$('#birth').val(result.data.birth);
+			$('#education').val(result.data.education);
+			$('#telephone').val(result.data.telephone);
+			$('#contact').val(result.data.contactName);
+			$('#gender').val(result.data.gender);
+			$('#currentStatus').val(result.data.currentStatus);
+			$('#resume').val(result.data.resume);
+			$('#username').val(result.data.username);
+			$('#workTime').val(result.data.workTime);
+		})
+	})
+	//添加功能
+	$('.btn_add').on('click',function(){
+		$('#modal-top').modal('show')
+		$('#id').val("");
+		$('#realname').val("");
+		$('#birth').val("");
+		$('#education').val("");
+		$('#telephone').val("");
+		$('#gender').val("");
+		$('#currentStatus').val("");
+		$('#resume').val("");
+		$('#username').val("");
+		$('#workTime').val("");
+	})
+	//提交按钮
+	$('.data_submit').on('click',function(){
+		var url = baseURL+'/Jobhunter/saveOrUpdate';
+		if($('#id').val()){
+			var data = {
+			id:$('#id').val(),
+			realname:$('#realname').val(),
+			birth:$('#birth').val(),
+			education:$('#education').val(),
+			telephone:$('#telephone').val(),
+			gender:$('#gender').val(),
+			currentStatus:$('#currentStatus').val(),
+			resume:$('#resume').val(),
+			username:$('#username').val(),
+			workTime:$('#workTime').val(),
+			}
+		}else{
+			var data = {
+			realname:$('#realname').val(),
+			birth:$('#birth').val(),
+			education:$('#education').val(),
+			telephone:$('#telephone').val(),
+			gender:$('#gender').val(),
+			currentStatus:$('#currentStatus').val(),
+			resume:$('#resume').val(),
+			username:$('#username').val(),
+			workTime:$('#workTime').val(),
+			}
+		}
+		$.post(url,data,function(result){
+			console.log(data)
+			if(result.status==200){
+				toast('提交成功')
+				reloadData()
+				$('#modal-top').modal('hide')
+			}else{
+				alert('提交失败')
+			}
+		})
+		
+	})
+	//删除功能
+	$('tbody').on('click','.btn_del',function(){
+		var url = baseURL+'/Jobhunter/deleteById';
+		var data = {
+			id:$(this).parents('tr').children().eq(0).children().eq(0).val(),
+		}
+		$.post(url,data,function(result){
+			if(result.status===200){
+				reloadData()
+				console.log(data)
+				toast('删除成功')
+			}else{
+				alert('删除失败')
+			}
+		})
+	})
+	//toast框弹出
+	function toast(message){
+		$('.toast').toast('show')
+		$('.toast-body').text(message)
+	}
+	//下拉框改变加载数据
+	$('.education-select').on('change',function(){
+		var url = baseURL+'/Jobhunter/findByEducation'
+		var data = {
+			education:$('.education-select').val()
+		}
+		$.get(url,data,function(result){
+			$('tbody').empty()
+			result.data.forEach(function(item){
+			$(`
+			<tr>
+			      <td><input type="checkbox" value="`+item.id+`"/></td>
+			      <td>`+item.username+`</td>
+			      <td>`+item.realname+`</td>
+			      <td>`+item.telephone+`</td>
+			      <td>`+item.gender+`</td>
+			      <td>`+item.birth+`</td>
+			      <td>`+item.education+`</td>
+			      <td><a href="javascript:void(0)" class="btn_upt">修改</a>&nbsp<a href="javascript:void(0)" class="btn_del">删除</a></td>
+			   </tr>
+			`).appendTo('tbody')	
+			})
+		})
+	})
+	$('.gender-select').on('change',function(){
+		var url = baseURL+'/Jobhunter/findByGender'
+		var data = {
+			gender:$('.gender-select').val()
+		}
+		$.get(url,data,function(result){
+			$('tbody').empty()
+			result.data.forEach(function(item){
+			$(`
+			<tr>
+			      <td><input type="checkbox" value="`+item.id+`"/></td>
+			      <td>`+item.username+`</td>
+			      <td>`+item.realname+`</td>
+			      <td>`+item.telephone+`</td>
+			      <td>`+item.gender+`</td>
+			      <td>`+item.birth+`</td>
+			      <td>`+item.education+`</td>
+			      <td><a href="javascript:void(0)" class="btn_upt">修改</a>&nbsp<a href="javascript:void(0)" class="btn_del">删除</a></td>
+			   </tr>
+			`).appendTo('tbody')	
+			})
+		})
+	})
+	//去重函数
+	function remove_same(arr){
+		var temp = []; //一个新的临时数组
+	    for(var i = 0; i < arr.length; i++){
+	        if(temp.indexOf(arr[i]) == -1){
+	            temp.push(arr[i]);
+	        }
+	    }
+	    return temp;
+	}
+	//重载下拉框
+	function reloadSelect(){
+		var url = baseURL+'/Jobhunter/findAll';
+		$.get(url,function(result){
+			$('.education-select').empty()
+			var dt = result.data;
+			var mid_edu = [];
+			dt.forEach(function(item){
+				mid_edu.push(item.education)
+			})
+			var last_edu = remove_same(mid_edu)
+			last_edu.forEach(function(item){
+				console.log(item)
+				$(`
+					<option value="`+item+`">`+item+`</option>
+					`).appendTo('.education-select')
+			})
+			$(`<option value="" style="display:none" selected>性别</option>`).appendTo('.gender-select')
+			$(`<option value="" style="display:none" selected>学历</option>`).appendTo('.education-select')
+		})
+	}
+	reloadSelect()
+	//重载数据
+	function reloadData(){
+		var url = baseURL+'/Jobhunter/findAll'
+		$.get(url,function(result){
+			$('tbody').empty()
+			result.data.forEach(function(item){
+				$(`
+					<tr>
+				      <td><input type="checkbox" value="`+item.id+`"/></td>
+				      <td>`+item.username+`</td>
+				      <td>`+item.realname+`</td>
+				      <td>`+item.telephone+`</td>
+				      <td>`+item.gender+`</td>
+				      <td>`+item.birth+`</td>
+				      <td>`+item.education+`</td>
+				      <td><a href="javascript:void(0)" class="btn_upt">修改</a>&nbsp<a href="javascript:void(0)" class="btn_del">删除</a></td>
+				   </tr>
+					`).appendTo('table')
+			})
+		})
+	}
+	reloadData()
+</script>

@@ -1,0 +1,150 @@
+<style type="text/css">
+	.RRR{
+		margin:15px;
+		margin-bottom: 0px;
+		border-top: 2px solid #3366ff;
+		display: inline-block;	
+		width: 	150px;
+		text-align: center;	
+		height: 50px;
+		line-height: 50px;
+		font-size: 	20px;
+	}
+	.select1{
+		margin-bottom: 20px;
+	}
+	.modal-backdrop.show{
+	z-index: -1;
+	}
+	.show{
+		background:rgba(139,126,102,0.5);
+	}
+	#modal-top{
+		padding-top: 60px;
+	}
+	p{
+		display: inline-block;
+		font-size: 20px;
+	}
+	.self{
+		width: 80px;
+		height: 30px;
+		line-height: 30px;
+		margin-left: 10px;
+		margin-bottom: 5px;
+		color:white;
+
+	}
+</style>
+<div class="main">
+	<h5 class="RRR">求职列表</h5><br>	
+	<button class="btn btn-secondary" style="margin:10px 20px">待联系</button>
+	<!-- 表开始 -->
+	<table class="table text-center table-hover">
+	  <thead class="thead-dark">
+	    <tr>
+	      <th scope="col">求职人</th>
+	      <th scope="col">联系方式</th>
+	      <th scope="col">求职岗位</th>
+	      <th scope="col">简历</th>
+	      <th scope="col">申请时间</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+  	  </tbody>
+	</table>
+	<!-- 表结束 -->
+	<!-- 模态框开始 -->
+	<div class="modal" id="modal-top" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" style="max-width:800px;">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">添加客服</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	<div class="self bg-primary text-center"><b>个人信息</b></div>
+	      	<div class="container-fluid">
+	      		<div class="row">
+	      			<div class="col">
+	      	 			<p>性别:</p>
+	      	 			<p class="p1">22</p>
+	      			</div>
+	      			<div class="col">
+	      	 			<p>最高学历:</p>
+	      	  			<p class="p2">21</p>
+	      			</div>
+	      		</div>
+	      		<div class="row">
+	      			<div class="col">
+	      				<p>出生年月:</p>
+	      	 			<p class="p3">22</p>
+	      			</div>
+	      			<div class="col">
+	      				<p>工作经验:</p>
+	      	  			<p class="p4">22</p>
+	      			</div>
+	      		</div>
+	      	</div>
+	      </div>
+	      <div class="modal-footer">
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- 模态框结束 -->
+</div>
+<script type="text/javascript">
+	var baseURL= "http://47.106.244.1:7777";
+	//简历
+	$('tbody').on('click','.btn_look',function(){
+		var url = baseURL+'/EmploymentJobhunter/findAllWithJobhAndEmpl'
+		$('#modal-top').modal('show')
+		$.get(url,function(result){
+			result.data.forEach(function(item){
+				$('.p1').text(item.jobhunter.gender)
+				$('.p2').text(item.jobhunter.education)
+				$('.p3').text(item.jobhunter.birth)
+				$('.p3').text(item.jobhunter.workTime)
+				$('.modal-title').text(item.jobhunter.realname)
+			})
+		})
+	})
+	// 时间函数
+	var dateParse=(dataString)=>{
+		  if(dataString){
+		    let date = new Date(dataString);
+		    let Y = date.getFullYear() + '-';
+		    let M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+		    let D = (date.getDate()< 10 ? '0'+date.getDate() : date.getDate())+' ';
+		    let h = (date.getHours()< 10 ? '0'+date.getHours() : date.getHours())+ ':';
+		    let m = (date.getMinutes()< 10 ? '0'+date.getMinutes() : date.getMinutes())+ ':';
+		    let s = (date.getSeconds()< 10 ? '0'+date.getSeconds() : date.getSeconds());
+		    return Y+M+D;
+		  }else{
+		    return '';
+		  }
+		}
+	//重载数据
+	function reloadData(){
+		var url = baseURL+'/EmploymentJobhunter/findAllWithJobhAndEmpl'
+		$.get(url,function(result){
+			$('tbody').empty()
+			result.data.forEach(function(item){
+				console.log(item)
+				$(`
+					<tr>
+				      <td>`+item.jobhunter.realname+`</td>
+				      <td>`+item.jobhunter.telephone+`</td>
+				      <td>`+item.employment.job+`</td>
+				      <td><a href="javascript:void(0)" class="btn_look">查看</a></td>
+				      <td>`+dateParse(item.employment.publishTime)+`</td>
+				   </tr>
+					`).appendTo('tbody')
+			})
+		})
+	}
+	reloadData()
+</script>

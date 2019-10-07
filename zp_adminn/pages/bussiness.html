@@ -1,0 +1,523 @@
+<style type="	">
+	.RRR{
+		margin:15px;
+		border-top: 2px solid #3366ff;
+		display: inline-block;	
+		width: 	150px;
+		text-align: center;	
+		height: 50px;
+		line-height: 50px;
+		font-size: 	20px;
+	}
+	.select1{
+		margin-bottom: 20px;
+	}
+	.modal-backdrop.show{
+		z-index: -1;
+	}
+	.show{
+		background:rgba(139,126,102,0.5);
+	}
+	#modal-id,#exampleModal{
+		padding-top: 40px;
+	}
+	.noopacity{
+		opacity: 1;
+	}
+	.marked_use{
+		width: 90px;
+	}
+</style>
+<div class="main">
+	<h5 class="RRR">商家列表</h5>
+	<div class="container-fluid select1">
+		<div class="row">	
+			<div class="col-2">
+				<select class="custom-select location1">
+			      <option value="loc_no" class="sel_loc" style="display:none;" selected>所在地</option>
+			   </select>
+			</div>
+			<div class="col-2">
+				<select class="custom-select industry">
+			      <option value="ind_no"  style="display:none;" selected>行业</option>
+			   </select>
+			</div>
+			<div class="col-2">
+				<select class="custom-select scale">
+			      <option value="sca_no"  style="display:none;" selected>公司规模</option>
+			   </select>
+			</div>
+			<div class="btn btn-primary btn_rel" style="margin-left: 20px;margin-right: 20px;height:37px;">重置</div>
+		</div>	
+	</div>
+	<!-- 表开始 -->
+	<table class="table text-center table-hover">
+	  <thead class="thead-dark">
+	    <tr>
+	      <th scope="col">#</th>
+	      <th scope="col">企业名称</th>
+	      <th scope="col">联系人</th>
+	      <th scope="col">联系方式</th>
+	      <th scope="col">行业</th>
+	      <th scope="col">所在地</th>
+	      <th scope="col">公司规模</th>
+	      <th scope="col">详情</th>
+	      <th scope="col">操作</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+  	  </tbody>
+	</table>
+	<!-- 表结束 -->
+	<!-- 模态框开始 -->
+	<div class="modal" id="modal-id" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content noopacity">
+	      <div class="modal-header">
+	        <h5 class="modal-title">修改信息</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	<input type="hidden" class="form-control" id="id">
+	         <div class="input-group mb-3">
+				  <div class="input-group-prepend">
+				    <span class="input-group-text marked_use">企业名称</span>
+				  </div>
+				  <input type="text" class="form-control" id="name">
+				</div>
+				<div class="input-group mb-3">
+				  <div class="input-group-prepend">
+				    <span class="input-group-text marked_use">联系人</span>
+				  </div>
+				  <input type="text" class="form-control" id="contactName">
+				</div>
+				<div class="input-group mb-3">
+				  <div class="input-group-prepend">
+				    <span class="input-group-text marked_use">联系方式</span>
+				  </div>
+				  <input type="text" class="form-control" id="contactPhone">
+				</div>
+				<div class="input-group mb-3">
+				  <div class="input-group-prepend">
+				    <span class="input-group-text marked_use">行业类型</span>
+				  </div>
+				  <input type="text" class="form-control" id="industry">
+				</div>
+				<div class="container-fluid" style="margin-bottom:10px;">
+					<div class="row">
+						<div class="col">
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+	    							<label class="input-group-text" for="inputGroupSelect01">城市</label>
+	  							</div>
+								<select class="custom-select location2">
+							   </select>
+							</div> 
+						</div>
+						<div class="col">
+							<div class="input-group mb-3">
+							  <div class="input-group-prepend">
+							    <label class="input-group-text" for="inputGroupSelect01">规模</label>
+							  </div>
+							  <select class="custom-select scale2" id="inputGroupSelect01">
+							  </select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="input-group mb-3">
+				  <div class="input-group-prepend">
+				    <span class="input-group-text marked_use">详细信息</span>
+				  </div>
+				  <input type="text" class="form-control" id="description">
+				</div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+	        <button type="button" class="btn btn-primary data_submit">提交</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- 模态框结束 -->
+	<!-- 模态框二开始 -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" >
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">详情展示</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	<div class="contianer">
+	      		<div class="row">
+	      			<div class="col">
+	      				<div class="input-group mb-3">
+							  <div class="input-group-prepend">
+							    <span class="input-group-text marked_use">id</span>
+							  </div>
+							  <input type="text" class="form-control" id="id" readonly="">
+							</div>
+	      			</div>
+	      			<div class="col">
+	      				<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text marked_use">企业名称</span>
+						  </div>
+						  <input type="text" class="form-control" id="name" readonly="">
+						</div>
+	      			</div>
+	      		</div>
+	      		<div class="row">
+	      			<div class="col">
+	      				<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text marked_use">联系人</span>
+						  </div>
+						  <input type="text" class="form-control" id="contactName" readonly="">
+						</div>
+	      			</div>
+	      			<div class="col">
+	      				<div class="input-group mb-3">
+							  <div class="input-group-prepend">
+							    <span class="input-group-text marked_use">联系方式</span>
+							  </div>
+							  <input type="text" class="form-control" id="contactPhone" readonly="">
+							</div>
+	      			</div>
+	      		</div>
+	      		<div class="row">
+	      			<div class="col">
+	      				<div class="input-group mb-3">
+							  <div class="input-group-prepend">
+							    <span class="input-group-text marked_use">行业类型</span>
+							  </div>
+							  <input type="text" class="form-control" id="industry" readonly="">
+							</div>
+	      			</div>
+	      			<div class="col">
+	      				<div class="input-group mb-3">
+							  <div class="input-group-prepend">
+							    <span class="input-group-text marked_use">所在城市</span>
+							  </div>
+							  <input type="text" class="form-control" id="location" readonly="">
+							</div>
+	      			</div>
+	      		</div>
+	      		<div class="row">
+	      			<div class="col">
+	      				<div class="input-group mb-3">
+							  <div class="input-group-prepend">
+							    <span class="input-group-text marked_use">规模</span>
+							  </div>
+							  <input type="text" class="form-control" id="scale" readonly="">
+							</div>
+	      			</div>
+	      			<div class="col">
+	      				<div class="input-group mb-3">
+							  <div class="input-group-prepend">
+							    <span class="input-group-text marked_use">注册时间</span>
+							  </div>
+							  <input type="text" class="form-control" id="establishedTime" readonly="">
+							</div>
+	      			</div>
+	      		</div>
+	      		<div class="row">
+	      			<div class="col">
+	      				<div class="input-group mb-3">
+							  <div class="input-group-prepend">
+							    <span class="input-group-text marked_use">注册资本</span>
+							  </div>
+							  <input type="text" class="form-control" id="registeredCapital" readonly="">
+							</div>
+	      			</div>
+	      			<div class="col">
+	      				<div class="input-group mb-3">
+							  <div class="input-group-prepend">
+							    <span class="input-group-text marked_use">营业执照</span>
+							  </div>
+							  <input type="text" class="form-control" id="businessLicense" readonly="">
+							</div>
+	      			</div>
+	      		</div>
+	      		<div class="row">
+	      			<div class="card" style="width: 100%;height:200px;">
+						  
+						  <div class="card-body">
+						    <h5 class="card-title">详细描述</h5>
+						    <p class="card-text"></p>
+						  </div>
+						</div>
+	      		</div>
+	      	</div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- 模态框二结束 -->
+</div>
+<script type="text/javascript">
+	var baseUrl = 'http://47.106.244.1:7777';
+	//详情页面			
+	$('tbody').on('click','a',function(){
+		var url = baseUrl+'/Business/findById'
+		var data = {
+			id:$(this).parents('tr').children().eq(0).children().eq(0).val()
+		}
+		$.get(url,data,function(result){
+			if(result.status===200){
+				$('#exampleModal').modal("show")
+				$("input[id='id']").val(result.data.id)
+				$("input[id='name']").val(result.data.name)
+				$("input[id='scale']").val(result.data.scale)
+				$("input[id='location']").val(result.data.location)
+				$("input[id='contactName']").val(result.data.contactName)
+				$("input[id='contactPhone']").val(result.data.contactPhone)
+				$("input[id='industry']").val(result.data.industry)
+				$("input[id='establishedTime']").val(result.data.establishedTime)
+				$("input[id='registeredCapital']").val(result.data.registeredCapital)
+				$("input[id='businessLicense']").val(result.data.businessLicense)
+				$('.card-text').text(result.data.description)
+			}
+		})
+
+	})
+	//重置按钮
+	$('.btn_rel').on('click',function(){
+		$('tbody').empty()
+		reloadData();
+		optionReload();
+	})
+	//去重函数
+	function remove_same(arr){
+		arr.sort();
+		var res = [];
+		for(var i=0;i<arr.length;i++){
+			if(arr[i]!==arr[i+1]){
+				res.push(arr[i]);
+			}
+		}
+		return res;
+	}
+	//加载下拉框数据
+	function optionReload(){
+		var url = baseUrl + '/Business/findAll';
+		$.get(url,function(result){
+			if(result.status===200){
+				var data1 = result.data
+				var e = [] 
+				var f = [] 
+				var g = [] 
+				data1.forEach(function(item){  
+					e.push(item.location)
+					f.push(item.industry)
+					g.push(item.scale)
+				})
+				var loc = remove_same(e);
+				var ind = remove_same(f);
+				var sca = remove_same(g);
+				$(".location1").find("option").remove();
+				$(".location2").find("option").remove();
+				$(".industry").find("option").remove();
+				$(".scale").find("option").remove();
+				$(".scale2").find("option").remove();
+				loc.forEach(function(item){
+					$(`<option value="`+item+`">`+item+`</option>`).appendTo('.location1')
+					$(`<option value="`+item+`">`+item+`</option>`).appendTo('.location2')
+				})
+				$('.location1').append('<option value="loc_no" class="sel_loc" style="display:none;" selected>所在地</option>')
+				ind.forEach(function(item){
+					$(`<option value="`+item+`">`+item+`</option>`).appendTo('.industry')
+				})
+				$('.industry').append('<option value="ind_no" class="sel_loc" style="display:none;" selected>行业</option>')
+
+				sca.forEach(function(item){
+					$(`<option value="`+item+`">`+item+`</option>`).appendTo('.scale')
+					$(`<option value="`+item+`">`+item+`</option>`).appendTo('.scale2')
+				})
+				$('.scale').append('<option value="sca_no" class="sel_loc" style="display:none;" selected>公司规模</option>')
+			}
+		})
+	}
+	optionReload();
+	//地址下拉框选中改变
+	$('.location1').on('change',function(){
+		var url = baseUrl+'/Business/findByLocation'
+		var data = {
+			location:$('.location1').val()
+		}
+		console.log(data)
+		$.get(url,data,function(result){
+			if (result.status===200) {
+				$('tbody').empty()
+				console.log(result.data)
+				result.data.forEach(function(item){
+				$(`<tr>
+			      <td><input type="checkbox" value="`+item.id+`"/></td>
+			      <td>`+item.name+`</td>
+			      <td>`+item.contactName+`</td>
+			      <td>`+item.contactPhone+`</td>
+			      <td>`+item.industry+`</td>
+			      <td>`+item.location+`</td>
+			      <td>`+item.scale+`</td>
+			      <td><a href="" class="look">查看</a></td>
+			      <td><i class="fa fa-trash btn_del"></i>&nbsp&nbsp<i class="fa fa-pencil-square btn_upt"></i></td>
+			   </tr>
+					`).appendTo('tbody')
+				})
+			}else{
+				alert('失败')
+			}
+		})
+	})
+	//行业下拉框选中改变
+	$('.industry').on('change',function(){
+		var url = baseUrl+'/Business/findByIndustry'
+		var data = {
+			industry:$('.industry').val()
+		}
+		console.log(data)
+		$.get(url,data,function(result){
+			if (result.status===200) {
+				$('tbody').empty()
+				console.log(result.data)
+				result.data.forEach(function(item){
+				$(`<tr>
+			      <td><input type="checkbox" value="`+item.id+`"/></td>
+			      <td>`+item.name+`</td>
+			      <td>`+item.contactName+`</td>
+			      <td>`+item.contactPhone+`</td>
+			      <td>`+item.industry+`</td>
+			      <td>`+item.location+`</td>
+			      <td>`+item.scale+`</td>
+			      <td><a href="javascript:void(0)">查看</a></td>
+			      <td><i class="fa fa-trash btn_del"></i>&nbsp&nbsp<i class="fa fa-pencil-square btn_upt"></i></td>
+			   </tr>
+					`).appendTo('tbody')
+				})
+			}else{
+				alert('失败')
+			}
+		})
+	})
+	//规模下拉框选中改变
+	$('.scale').on('change',function(){
+		var url = baseUrl+'/Business/findByScale'
+		var data = {
+			scale:$('.scale').val()
+		}
+		console.log(data)
+		$.get(url,data,function(result){
+			if (result.status===200) {
+				$('tbody').empty()
+				console.log(result.data)
+				result.data.forEach(function(item){
+				$(`<tr>
+			      <td><input type="checkbox" value="`+item.id+`"/></td>
+			      <td>`+item.name+`</td>
+			      <td>`+item.contactName+`</td>
+			      <td>`+item.contactPhone+`</td>
+			      <td>`+item.industry+`</td>
+			      <td>`+item.location+`</td>
+			      <td>`+item.scale+`</td>
+			      <td><a href="javascript:void(0)">查看</a></td>
+			      <td><i class="fa fa-trash btn_del"></i>&nbsp&nbsp<i class="fa fa-pencil-square btn_upt"></i></td>
+			   </tr>
+					`).appendTo('tbody')
+				})
+			}else{
+				alert('失败')
+			}
+		})
+	})
+	//修改功能
+	$('tbody').on('click','.btn_upt',function(){
+		$('#modal-id').modal("show")
+		$('input[id=id]').val($(this).parents('tr').children().eq(0).children().eq(0).val())
+		$('input[id="name"]').val($(this).parents('tr').children().eq(1).text())
+		$('input[id="contactName"]').val($(this).parents('tr').children().eq(2).text())
+		$('input[id="contactPhone"]').val($(this).parents('tr').children().eq(3).text())
+		$('input[id="industry"]').val($(this).parents('tr').children().eq(4).text())
+		$('.location2').val($(this).parents('tr').children().eq(5).text())
+		$('.scale2').val($(this).parents('tr').children().eq(6).text())
+		$('input[id="description"]').val($(this).parents('tr').children().eq(7).text())
+		$('.data_submit').on('click',function(){
+			var url = baseUrl+'/Business/saveOrUpdate'
+			console.log(1)
+			var data = {
+				id:$('input[id=id]').val(),
+				name:$('input[id="name"]').val(),
+				contactName:$('input[id="contactName"]').val(),
+				contactPhone:$('input[id="contactPhone"]').val(),
+				industry:$('input[id="industry"]').val(),
+				location:$('.location2').val(),
+				scale:$('.scale2').val(),
+				description:$('input[id="description"]').val(),
+				establishedTime:3232,
+				registeredCapital:'300w',
+				businessLicense:'无',
+				status:'待审核',
+			}
+			$.post(url,data,function(result){
+				if(result.status==200){
+					reloadData()
+					$('#modal-id').modal('hide')
+					 optionReload()
+				}else{
+					alert('修改失败')
+				}
+			})
+		})
+	})
+	//删除功能
+	$('tbody').on('click','.btn_del',function(){
+		var url = baseUrl+'/Business/deleteById';
+		var data = {
+			id:$(this).parents('tr').children().eq(0).children().eq(0).val()
+		}
+		console.log(data)
+		$.post(url,data,function(result){
+			if(result.status===200){
+				reloadData()
+			}else{
+				alert('删除失败')
+			}
+		})
+	})
+	
+	//重载数据功能
+	function reloadData(){
+		var url = baseUrl + '/Business/findAll';
+		$.get(url,function(result){
+			if(result.status==200){
+				$('tbody').empty();
+				result.data.forEach(function(item){
+					if(item.status=='审核通过'){
+						$(`<tr>
+						      <td><input type="checkbox" value="`+item.id+`"/></td>
+						      <td>`+item.name+`</td>
+						      <td>`+item.contactName+`</td>
+						      <td>`+item.contactPhone+`</td>
+						      <td>`+item.industry+`</td>
+						      <td>`+item.location+`</td>
+						      <td>`+item.scale+`</td>
+						      <td><a href="javascript:void(0)" value='`+item.description+`'>查看</a></td>
+						      <td><i class="fa fa-trash btn_del"></i>&nbsp&nbsp<i class="fa fa-pencil-square btn_upt"></i></td>	
+					      </tr>
+						`).appendTo('tbody')
+					}
+					
+				})
+			
+			}
+		})
+	}
+	reloadData()
+</script>
