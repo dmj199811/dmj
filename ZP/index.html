@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>招聘网</title>
     <link rel="icon" href="images/5555pct.favicon.ico" type="image/x-icon"/>
     <link rel="stylesheet" href="style/style.css"/>
  <style type="text/css">
@@ -52,12 +52,16 @@
         padding:5px;
         margin-top: 10px;
      }
-     .btn_sub{
+     .btn_sub,.btn_cls{
         width: 80px;
-        display: block;
+        display: inline-block;
         height: 40px;
         background-color: #3385ff;
-        margin:30px auto;
+        margin-top:30px;
+     }
+     .btn_sub{
+        margin-left: 200px;
+        margin-right: 40px;
      }
      li{
         cursor: pointer;
@@ -200,6 +204,7 @@
             <label for='telephone'>手机号</label>
             <input type="text" name="telephone" id="telephone">
             <button class="btn_sub">提交</button>   
+            <button class="btn_cls">关闭</button>   
         </div>
     </div>
     <div class="ym">
@@ -246,6 +251,10 @@
                     education:$('input[id=education]').val(),
                     telephone:$('input[id=telephone]').val(),
                 }
+            })
+            //点击关闭
+            $('.btn_cls').on('click',function(){
+                $('.outer').addClass('disa')
             })
             //去重函数
             function rm(arr){
